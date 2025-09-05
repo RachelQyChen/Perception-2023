@@ -1,0 +1,334 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>rachelChen</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2023-09-18"><meta name="DC.source" content="rachelChen.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">Background</a></li><li><a href="#2">Sampling the visible spectrum</a></li><li><a href="#3">1) (a) Make a graph of the 18th Macbeth surface illuminated by illuminant A (matlab variable cie_a).</a></li><li><a href="#4">1) (b) Make a graph of the 18th Macbeth surface illuminated by the fluorescent illuminant.</a></li><li><a href="#5">1) (c) Calculate the cone responses for the 18th Macbeth surface when illuminated by illuminant A.</a></li><li><a href="#6">1) (d) Calculate the cone responses for the 18th Macbeth surface illuminated by the fluorescent illuminant.</a></li><li><a href="#7">1) (e) Which of these will look more blueish and why?</a></li><li><a href="#8">2) (a) Calculate the monitor intensities to match the color of the 1st Macbeth surface when illuminated by illuminant A.</a></li><li><a href="#9">2) (b) Assume that there s no limit to the maximum intensity that can be produced by your monitor.</a></li><li><a href="#10">3) Calculate the monitor intensities for an S-cone isolating stimulus.</a></li><li><a href="#11">3) (b) Add an increment to the S-cone responses and compute the monitor intensities</a></li><li><a href="#12">3) (c) What are the monitor intensities corresponding to the largest possible</a></li><li><a href="#13">4) The CIE in 1939 set a standard for the color matching functions using 3</a></li><li><a href="#14">5) Imagine that you are to do the color matching experiment using the monitor</a></li><li><a href="#15">5) (b) Compute the 3x3 matrix that that</a></li><li><a href="#16">5) (c) Calculate and plot new color matching functions from</a></li></ul></div><h2 id="1">Background</h2><pre class="codeinput">cd(<span class="string">'C:\Users\Rachel\Desktop\2023Fall\Perception\Assignment1'</span>)
+</pre><h2 id="2">Sampling the visible spectrum</h2><pre class="codeinput">spectrum=linspace(400,700,31);
+load <span class="string">surfaces</span>
+size(macbeth)
+size(munsell)
+load <span class="string">illuminants</span> <span class="comment">%cie_a,daylight_65,fluorescent,illuminant_C,xenon_flash</span>
+load <span class="string">cones</span>
+load <span class="string">phosphors</span>
+</pre><pre class="codeoutput">
+ans =
+
+    24    31
+
+
+ans =
+
+   359    31
+
+</pre><h2 id="3">1) (a) Make a graph of the 18th Macbeth surface illuminated by illuminant A (matlab variable cie_a).</h2><pre class="codeinput">signal1a=macbeth(18,:)' .* cie_a';
+
+figure1=figure;clf; hold <span class="string">on</span>;
+plot(spectrum, signal1a);
+xlabel(<span class="string">'Wavelength (nm)'</span>);
+ylabel(<span class="string">'Reflected Energy'</span>);
+title(<span class="string">'Reflected energy of surfaces under cie_a'</span>)
+</pre><img vspace="5" hspace="5" src="rachelChen_01.png" alt=""> <h2 id="4">1) (b) Make a graph of the 18th Macbeth surface illuminated by the fluorescent illuminant.</h2><pre class="codeinput">signal1b=macbeth(18,:)' .* flourescent';
+figure2=figure;clf; hold <span class="string">on</span>;
+plot(spectrum, signal1b);
+xlabel(<span class="string">'Wavelength (nm)'</span>);
+ylabel(<span class="string">'Reflected Energy'</span>);
+title(<span class="string">'Reflected energy of surfaces under flourescent'</span>)
+</pre><img vspace="5" hspace="5" src="rachelChen_02.png" alt=""> <h2 id="5">1) (c) Calculate the cone responses for the 18th Macbeth surface when illuminated by illuminant A.</h2><pre class="codeinput">coneSignal1a = cones * signal1a;
+disp(coneSignal1a);
+</pre><pre class="codeoutput">   65.2373
+   53.5643
+   61.9800
+
+</pre><h2 id="6">1) (d) Calculate the cone responses for the 18th Macbeth surface illuminated by the fluorescent illuminant.</h2><pre class="codeinput">coneSignal1b = cones * signal1b;
+disp(coneSignal1b);
+</pre><pre class="codeoutput">   66.1124
+   68.4875
+  182.9654
+
+</pre><h2 id="7">1) (e) Which of these will look more blueish and why?</h2><pre class="codeinput"><span class="comment">%The first color (illuminated by the cie_a illuminant) may appear</span>
+<span class="comment">%more blueish since eventhough the second color has higher S-cone value, it</span>
+<span class="comment">%also has a significantly higher L-cone value. At the same time, for the first</span>
+<span class="comment">% color, the energy peak is between the blue range (450nm-495nm).</span>
+<span class="comment">% Thus overall, the first color is more balanced on the</span>
+<span class="comment">% spactrum and will appear more blueish.</span>
+</pre><h2 id="8">2) (a) Calculate the monitor intensities to match the color of the 1st Macbeth surface when illuminated by illuminant A.</h2><pre class="codeinput">signal2a=macbeth(1,:)' .* cie_a';
+coneSignal2a = cones * signal2a;
+
+monitor_to_cones = cones * phosphors';
+cones_to_monitor = inv(monitor_to_cones);
+
+monitorSignals2a = cones_to_monitor * coneSignal2a;
+disp(monitorSignals2a);
+</pre><pre class="codeoutput">   1.0e+03 *
+
+    1.7947
+    1.9383
+    0.4740
+
+</pre><h2 id="9">2) (b) Assume that there s no limit to the maximum intensity that can be produced by your monitor.</h2><p>Can this color be displayed properly onthe monitor? Why or why not?</p><pre class="codeinput"><span class="comment">%The RGB of this color is: R(1794.7), G(1938.3), B(474.0). Since there is</span>
+<span class="comment">%no maximum intensity and all numbers are bigger than 0,</span>
+<span class="comment">% so that it can be produced by the monitor, so the color can be displayed.</span>
+</pre><h2 id="10">3) Calculate the monitor intensities for an S-cone isolating stimulus.</h2><p>(a) Start with a neutral stimulus, with the monitor intensities set to be [1,1,1]. What are the cone responses for that stimulus?</p><pre class="codeinput">phoSignal3a = phosphors'* [1, 1, 1]';
+coneSignal3a = cones * phoSignal3a;
+
+
+disp(coneSignal3a);
+</pre><pre class="codeoutput">    0.2638
+    0.2257
+    0.1591
+
+</pre><h2 id="11">3) (b) Add an increment to the S-cone responses and compute the monitor intensities</h2><p>that would evoke the new cone responses with the S-cones incremented. What's the largest S-cone increment that can be added (again, assuming that there s no limit to the maximum intensity)?</p><pre class="codeinput"><span class="comment">%coneSignalIncre=coneSignal3a+[0,0,x]';</span>
+<span class="comment">%Z=cones_to_monitor*coneSignalIncre;</span>
+Z_without_x=cones_to_monitor(2,1:2) * coneSignal3a(1:2);
+x_max=(Z_without_x)/1.3891;
+disp(x_max);
+</pre><pre class="codeoutput">    0.8790
+
+</pre><h2 id="12">3) (c) What are the monitor intensities corresponding to the largest possible</h2><p>S-cone increment?</p><pre class="codeinput">coneSignalIncre=coneSignal3a+[0,0,0.8790]';
+monitorSignals3b = cones_to_monitor *coneSignalIncre;
+disp(monitorSignals3b);
+</pre><pre class="codeoutput">    1.8471
+   -0.2210
+    7.4849
+
+</pre><h2 id="13">4) The CIE in 1939 set a standard for the color matching functions using 3</h2><p>monochromatic primaries of 440 nm, 550 nm, and 700 nm. Calculate and graph what these color matching functions should be using the cone spectral sensitivities. Set the intensity of the 700 nm primary to be much larger (80x) more than the intensities of the other primaries to plot all 3 color matching functions on the same scale.</p><pre class="codeinput">P=zeros(31,3);
+P((440-400)/10+1, 3)=1;
+P((550-400)/10+1, 2)=1;
+P((700-400)/10+1, 1)=80;
+cmf=inv(cones*P)*cones;
+
+figure; hold <span class="string">on</span>;
+plot(spectrum, cmf(3,:),<span class="string">'b'</span>);
+plot(spectrum, cmf(2,:),<span class="string">'g'</span>);
+plot(spectrum, cmf(1,:),<span class="string">'r'</span>);
+xlabel(<span class="string">'Wavelength (nm)'</span>);
+ylabel(<span class="string">'Relative Energy'</span>);
+legend(<span class="string">'440nm'</span>, <span class="string">'550nm'</span>, <span class="string">'700nm'</span>);
+</pre><img vspace="5" hspace="5" src="rachelChen_03.png" alt=""> <h2 id="14">5) Imagine that you are to do the color matching experiment using the monitor</h2><p>phosphors as the primaries instead of the monochromatic primaries that the CIE used. (a) Write an equation (an actual equation, not code) for the new color matching functions in terms of the old color matching functions, the cone spectral sensitivities, and the SPDs of the two sets of primaries. You will have to use the cone spectral sensitivities but you must not use any test lights.</p><pre class="codeinput"><span class="comment">%cones X cmf X Primary sensitivities=cones X phosphors SPD X Newcmf</span>
+<span class="comment">% Newcmf=(cones X phosphors SPD)^-1 X cones X cmf X Primary sensitivities</span>
+</pre><h2 id="15">5) (b) Compute the 3x3 matrix that that</h2><p>converts the CIE color matching functions to the new color matching functions. What are the numerical values of the entries in that matrix?</p><pre class="codeinput">f=inv(cones*phosphors');
+coenewcmf=f*cones*P;
+disp(coenewcmf);
+</pre><pre class="codeoutput">    8.8624    0.0655    0.6738
+   -1.9196    6.1927   -1.0220
+   -0.0999   -0.6997    7.3453
+
+</pre><h2 id="16">5) (c) Calculate and plot new color matching functions from</h2><p>the original CIE color matching functions.</p><pre class="codeinput">newCMF=coenewcmf*cmf;
+
+figure; hold <span class="string">on</span>;
+plot(spectrum, newCMF(1,:), <span class="string">'r'</span>); hold <span class="string">on</span>;
+plot(spectrum, newCMF(2,:), <span class="string">'g'</span>);
+plot(spectrum, newCMF(3,:), <span class="string">'b'</span>);
+xlabel(<span class="string">'Wavelength (nm)'</span>);
+ylabel(<span class="string">'Relative Energy'</span>);
+legend(<span class="string">'R'</span>, <span class="string">'G'</span>, <span class="string">'B'</span>);
+</pre><img vspace="5" hspace="5" src="rachelChen_04.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2022b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Background
+cd('C:\Users\Rachel\Desktop\2023Fall\Perception\Assignment1')
+%% Sampling the visible spectrum
+spectrum=linspace(400,700,31);
+load surfaces  
+size(macbeth)
+size(munsell)
+load illuminants %cie_a,daylight_65,fluorescent,illuminant_C,xenon_flash
+load cones
+load phosphors
+%% 1) (a) Make a graph of the 18th Macbeth surface illuminated by illuminant A (matlab variable cie_a).
+signal1a=macbeth(18,:)' .* cie_a'; 
+
+figure1=figure;clf; hold on; 
+plot(spectrum, signal1a);
+xlabel('Wavelength (nm)');
+ylabel('Reflected Energy');
+title('Reflected energy of surfaces under cie_a')
+%% 1) (b) Make a graph of the 18th Macbeth surface illuminated by the fluorescent illuminant.
+signal1b=macbeth(18,:)' .* flourescent'; 
+figure2=figure;clf; hold on; 
+plot(spectrum, signal1b);
+xlabel('Wavelength (nm)');
+ylabel('Reflected Energy');
+title('Reflected energy of surfaces under flourescent')
+
+%% 1) (c) Calculate the cone responses for the 18th Macbeth surface when illuminated by illuminant A.
+coneSignal1a = cones * signal1a;
+disp(coneSignal1a);
+
+%% 1) (d) Calculate the cone responses for the 18th Macbeth surface illuminated by the fluorescent illuminant.
+coneSignal1b = cones * signal1b;
+disp(coneSignal1b);
+
+%% 1) (e) Which of these will look more blueish and why?
+%The first color (illuminated by the cie_a illuminant) may appear
+%more blueish since eventhough the second color has higher S-cone value, it
+%also has a significantly higher L-cone value. At the same time, for the first 
+% color, the energy peak is between the blue range (450nm-495nm). 
+% Thus overall, the first color is more balanced on the 
+% spactrum and will appear more blueish. 
+
+
+%% 2) (a) Calculate the monitor intensities to match the color of the 1st Macbeth surface when illuminated by illuminant A.
+signal2a=macbeth(1,:)' .* cie_a'; 
+coneSignal2a = cones * signal2a;
+
+monitor_to_cones = cones * phosphors';
+cones_to_monitor = inv(monitor_to_cones);
+
+monitorSignals2a = cones_to_monitor * coneSignal2a;
+disp(monitorSignals2a);
+
+%% 2) (b) Assume that there s no limit to the maximum intensity that can be produced by your monitor. 
+% Can this color be displayed properly onthe monitor? Why or why not?
+
+%The RGB of this color is: R(1794.7), G(1938.3), B(474.0). Since there is
+%no maximum intensity and all numbers are bigger than 0, 
+% so that it can be produced by the monitor, so the color can be displayed. 
+
+
+%% 3) Calculate the monitor intensities for an S-cone isolating stimulus. 
+% (a) Start with a neutral stimulus, with the monitor intensities set to be [1,1,1]. 
+% What are the cone responses for that stimulus?
+
+phoSignal3a = phosphors'* [1, 1, 1]';
+coneSignal3a = cones * phoSignal3a;
+
+
+disp(coneSignal3a);
+
+%% 3) (b) Add an increment to the S-cone responses and compute the monitor intensities 
+% that would evoke the new cone responses with the S-cones incremented. 
+% What's the largest S-cone increment that can be added 
+% (again, assuming that there s no limit to the maximum intensity)?
+
+%coneSignalIncre=coneSignal3a+[0,0,x]';
+%Z=cones_to_monitor*coneSignalIncre;
+Z_without_x=cones_to_monitor(2,1:2) * coneSignal3a(1:2);
+x_max=(Z_without_x)/1.3891;
+disp(x_max);
+
+%% 3) (c) What are the monitor intensities corresponding to the largest possible 
+% S-cone increment?
+coneSignalIncre=coneSignal3a+[0,0,0.8790]';
+monitorSignals3b = cones_to_monitor *coneSignalIncre;
+disp(monitorSignals3b);
+
+%% 4) The CIE in 1939 set a standard for the color matching functions using 3
+% monochromatic primaries of 440 nm, 550 nm, and 700 nm. Calculate and graph what
+% these color matching functions should be using the cone spectral sensitivities. Set the
+% intensity of the 700 nm primary to be much larger (80x) more than the intensities of the
+% other primaries to plot all 3 color matching functions on the same scale.
+
+P=zeros(31,3);
+P((440-400)/10+1, 3)=1;
+P((550-400)/10+1, 2)=1;
+P((700-400)/10+1, 1)=80;
+cmf=inv(cones*P)*cones;
+
+figure; hold on;
+plot(spectrum, cmf(3,:),'b');
+plot(spectrum, cmf(2,:),'g');
+plot(spectrum, cmf(1,:),'r');
+xlabel('Wavelength (nm)');
+ylabel('Relative Energy');
+legend('440nm', '550nm', '700nm');
+
+%% 5) Imagine that you are to do the color matching experiment using the monitor
+% phosphors as the primaries instead of the monochromatic primaries that the CIE used.
+% (a) Write an equation (an actual equation, not code) for the new color matching
+% functions in terms of the old color matching functions, the cone spectral sensitivities,
+% and the SPDs of the two sets of primaries. You will have to use the cone spectral
+% sensitivities but you must not use any test lights. 
+
+%cones X cmf X Primary sensitivities=cones X phosphors SPD X Newcmf
+% Newcmf=(cones X phosphors SPD)^-1 X cones X cmf X Primary sensitivities
+
+%% 5) (b) Compute the 3x3 matrix that that 
+% converts the CIE color matching functions to the new color matching functions. What
+% are the numerical values of the entries in that matrix?
+
+f=inv(cones*phosphors');
+coenewcmf=f*cones*P;
+disp(coenewcmf);
+
+%% 5) (c) Calculate and plot new color matching functions from 
+% the original CIE color matching functions.
+newCMF=coenewcmf*cmf;
+
+figure; hold on;
+plot(spectrum, newCMF(1,:), 'r'); hold on;
+plot(spectrum, newCMF(2,:), 'g');
+plot(spectrum, newCMF(3,:), 'b');
+xlabel('Wavelength (nm)');
+ylabel('Relative Energy');
+legend('R', 'G', 'B');
+
+
+
+
+##### SOURCE END #####
+--></body></html>
